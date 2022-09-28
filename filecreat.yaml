@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  serial: 4
+  tasks:
+  - name: Create a file in all the host machines
+    file:
+      path: /tmp/first.txt
+      owner: root
+      group: root
+      mode: '1777'
+      state: touch
+      
+...

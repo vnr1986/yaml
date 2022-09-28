@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  serial: 4
+  tasks:
+  - name: Installing tree in all the host machines
+    yum:
+      name: "tree"
+...

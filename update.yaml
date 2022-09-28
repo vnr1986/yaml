@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  serial: 4
+  tasks:
+  - name: Linux patching updates
+    yum:
+      name: "*"
+      state: latest
+...

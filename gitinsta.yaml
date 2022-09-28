@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Provisioning Git VCS
+      yum:
+        name: "{{item}}"
+      with_items:
+        - 'git'
+        - 'curl'
+...

@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: true
+  serial: 4
+  gather_facts: yes
+  tasks:
+    - name: display the message
+      debug:
+        msg: "Name is  {{named}}, Surname is {{surname}}, and city is {{city}}"
+    - name: Installing the httpd, httpd-tools
+      yum: 
+        name: '{{packages}}'
+        state: latest
+      vars:
+        packages:
+        - httpd
+        - httpd-tools
+    - name: Restarting and enabling the httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: copying index.html
+      template:
+        src: /home/ansible/index.html
+        dest: /var/www/html/index.html
+        mode: '0777'
+        owner: root
+        group: root
+      notify:
+        - Restart httpd server
+  handlers:
+    - name: Restart httpd server
+      service:
+        name: httpd
+        enabled: yes
+        state: restarted
+...
