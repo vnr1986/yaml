@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+  - name: Installing zip, unzip, git, vim in all host machines
+    yum:
+       name: ['git', 'zip', 'unzip', 'vim']
+       state: present
+...

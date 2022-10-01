@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+    - name: creating users
+      user:
+        name: venkatesh
+        create_home: yes
+...
